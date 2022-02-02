@@ -91,7 +91,7 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 <body>
 	<nav class="navbar navbar-expand-sm navbar-light bg-light">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Military Jobs</a>
+			<a class="navbar-brand" href="#">Military Job Search</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navab"
 				aria-controls="navab" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -99,6 +99,32 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 			<div class="collapse navbar-collapse" id="navab">
 				<div class="navbar-nav">
 					<a class="nav-link active" aria-current="page" href="#">Home</a>
+					<div class="dropdown">
+						<a class="btn btn-light dropdown-toggle" href="#" role="button" id="branchDropdown"
+							data-bs-toggle="dropdown" aria-expanded="false">
+							Branch Websites
+						</a>
+
+						<ul class="dropdown-menu" aria-labelledby="branchDropdown">
+							<li>
+								<a class="dropdown-item" target="_blank" href="https://goarmy.com">Army</a>
+							</li>
+							<li>
+								<a class="dropdown-item" target="_blank" href="https://www.airforce.com/">Air Force</a>
+							</li>
+							<li>
+								<a class="dropdown-item" target="_blank" href="https://www.marines.com/">Marine
+									Corps</a>
+							</li>
+							<li>
+								<a class="dropdown-item" target="_blank" href="https://www.navy.com/">Navy</a>
+							</li>
+							<li>
+								<a class="dropdown-item" target="_blank" href="https://www.gocoastguard.com/">Coast
+									Guard</a>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -110,7 +136,7 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 				<div class="col-1"></div>
 				<div class="col-10">
 					<section>
-						<small class="text-muted">Select the branch(es) you are interested in, or omit this field
+						<small class="text-muted">Select the branch you are interested in
 							altogether</small>
 						<div class="form-check">
 							<input class="form-check-input" type="radio" value="airforce" id="airforce" name="branch">
@@ -178,10 +204,12 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 						$branch_pretty = ucwords($branch);
 						$rank_pretty = ucwords($rank);
 
-						echo "<b>Branch: </b>" . $branch_pretty . "<br>";
-						echo "<b>Rank: </b>" . $rank_pretty . "<br>";
-						echo "<b>Query: </b>" . $query . "<br>";
-						echo "<b>Series: </b>" . $series . "<br>";
+						echo "<b>Branch: </b><i>" . $branch_pretty . "</i><br>";
+						echo "<b>Rank: </b><i>" . $rank_pretty . "</i><br>";
+						echo "<b>Query: </b><code>" . $query . "</code><br>";
+						if($branch_pretty == "Army"){
+							echo "<b>Series: </b><i>" . $series . "</i><br>";
+						}
 						echo "<b>Result: </b>";
 						?>
 		<table class="table table-secondary table-striped table-hover">
@@ -197,7 +225,7 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 						foreach ($dbh->query($query) as $row)
 							{
 								consoleLog($row);
-								echo "<tr><td>" . $row[0] . "</td><td>" . $row[1] . "</td><td>" . $row[2] . "</td></tr>";
+								echo "<tr><th scope=\"row\">" . $row[0] . "</th><td>" . $row[1] . "</td><td>" . $row[2] . "</td></tr>";
 							}
 						$dbh = null;
 						
