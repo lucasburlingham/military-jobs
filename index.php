@@ -136,8 +136,8 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 				<div class="col-1"></div>
 				<div class="col-10">
 					<section>
-						<small class="text-muted">Select the branch you are interested in
-							altogether</small>
+						<br>
+						<small class="text-muted">Select the branch you are interested in</small>
 						<div class="form-check">
 							<input class="form-check-input" type="radio" value="airforce" id="airforce" name="branch">
 							<label class="form-check-label" for="airforce">
