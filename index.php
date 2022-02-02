@@ -21,25 +21,28 @@ if (isset($_GET['rank'])) {
 	$rank_query = ucwords($_GET['rank']);
 	$rank = $_GET['rank'];
 } else {
-	$rank_query = "*";
+	$rank_query = "Enlisted";
 }
 
 // Format table names for use in query
 switch(isset($branch)) {
 	case ($branch == "airforce"):
-		$branch_query = 'afsc-airforce';
+		$branch_query = 'airforce';
 		break;
 	case ($branch == "army"):
-		$branch_query = 'mos-army';
+		$branch_query = 'army';
 		break;
-	case ($branch == "army"):
-		$branch_query = 'mos-army';
+	case ($branch == "navy"):
+		$branch_query = 'navy';
 		break;
-		case ($branch == "army"):
-		$branch_query = 'mos-army';
+	case ($branch == "marines"):
+		$branch_query = 'marines';
+		break;
+	case ($branch == "coastguard"):
+		$branch_query = 'coastguard';
 		break;
 	default:
-		$branch_query = 'mos-army';
+		$branch_query = 'army';
 		break;
 }
 
@@ -56,11 +59,11 @@ if(isset($_GET['series']) && $branch = "army") {
 
 // Only if the series is set, use the series data in the query
 if(isset($series_query)) {
-	$query = 'SELECT * FROM "' . $branch_query . '" WHERE "rank" = "' . $rank_query . '" AND "mos" LIKE "' . $series_query . '" ORDER BY "mos" ;';
+	$query = 'SELECT * FROM "' . $branch_query . '" WHERE "rank" LIKE "%' . $rank_query . '%" AND "mos" LIKE "' . $series_query . '";';
 	consoleLog("Query with series used");
 	consoleLog("Query: " . $query);
 } elseif(isset($rank_query)) {
-	$query = 'SELECT * FROM "' . $branch_query . '" WHERE "rank" = "' . $rank_query. '";';
+	$query = 'SELECT * FROM "' . $branch_query . '" WHERE "rank" LIKE "%' . $rank_query . '%";';
 	consoleLog("Query without series used");
 	consoleLog("Query: " . $query);
 }
@@ -120,21 +123,19 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 							<i class="fa fa-star" aria-hidden="true"></i> Army
 						</label>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" value="navy" id="navy" name="branch" disabled>
+							<input class="form-check-input" type="radio" value="navy" id="navy" name="branch">
 							<label class="form-check-label" for="navy">
 								<i class="fa fa-ship" aria-hidden="true"></i> Navy
 							</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" value="marines" id="marines" name="branch"
-								disabled>
+							<input class="form-check-input" type="radio" value="marines" id="marines" name="branch">
 							<label class="form-check-label" for="marines">
 								<i class="fa fa-globe-americas" aria-hidden="true"></i> Marines
 							</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" value="marines" id="marines" name="branch"
-								disabled>
+							<input class="form-check-input" type="radio" value="marines" id="coastguard" name="branch">
 							<label class="form-check-label" for="marines">
 								<i class="fa fa-life-ring" aria-hidden="true"></i> Coast Guard
 							</label>
