@@ -73,6 +73,7 @@ $dir = 'sqlite:mos-db.db';
 $dbh  = new PDO($dir) or die("Cannot open the database");
 
 ?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
