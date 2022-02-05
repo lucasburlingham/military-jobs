@@ -93,7 +93,7 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 <body>
 	<nav class="navbar navbar-expand-sm navbar-light bg-light">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">Military Job Search</a>
+			<div class="navbar-brand">Military Job Search</div>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navab"
 				aria-controls="navab" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -101,6 +101,7 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 			<div class="collapse navbar-collapse" id="navab">
 				<div class="navbar-nav">
 					<a class="nav-link active" aria-current="page" href="#">Home</a>
+					<a class="nav-link active" aria-current="page" href="/bases/">Bases</a>
 					<div class="dropdown">
 						<a class="btn btn-light dropdown-toggle" href="#" role="button" id="branchDropdown"
 							data-bs-toggle="dropdown" aria-expanded="false">
@@ -128,6 +129,9 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 					</div>
 				</div>
 			</div>
+			<span class="navbar-text">
+				Last Updated: 20220205
+			</span>
 		</div>
 	</nav>
 

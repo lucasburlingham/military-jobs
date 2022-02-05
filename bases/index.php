@@ -12,46 +12,46 @@ include_once '../functions.php';
 // if branch is set, get it from the form
 if(isset($_GET['branch'])) {
 	$branch_query = $_GET['branch'];
-	$branch = $_GET['branch'];
-} else {
-	$branch = "*";
 }
 
 // if the rank is set, get it from the form
 if (isset($_GET['oconus'])) {
 	$oconus_pretty = ucwords($_GET['oconus']);
 	$oconus = $_GET['oconus'];
-} else {
-	$rank_query = "*";
 }
 
 // Format table names for use in query
-switch(isset($branch)) {
-	case ($branch == "airforce"):
+switch(isset($_GET['branch'])) {
+	case ($_GET['branch']== "airforce"):
 		$branch_query = 'airforce';
 		break;
-	case ($branch == "army"):
+	case ($_GET['branch'] == "army"):
 		$branch_query = 'army';
 		break;
-	case ($branch == "navy"):
+	case ($_GET['branch'] == "navy"):
 		$branch_query = 'navy';
 		break;
-	case ($branch == "marines"):
+	case ($_GET['branch'] == "marines"):
 		$branch_query = 'marines';
 		break;
-	case ($branch == "coastguard"):
+	case ($_GET['branch'] == "coastguard"):
 		$branch_query = 'coastguard';
 		break;
 	default:
-		$branch_query = '*';
 		break;
 }
 
-$query = "SELECT * FROM 'bases' WHERE branch LIKE '%". $branch_query . "%' AND oconus LIKE '". $oconus . "'";
+
+if(isset($_GET['oconus'])) {
+	$query = "SELECT * FROM 'bases' WHERE branch LIKE '%". $branch_query . "%' AND oconus LIKE '". $oconus . "'";
+} elseif(isset($_GET['branch'])) {
+	$query = "SELECT * FROM 'bases' WHERE branch LIKE '%". $branch_query . "%'";
+} else {
+	$query = "SELECT * FROM 'bases'";
+}
+
 $state = "SELECT DISTINCT location FROM 'bases' WHERE oconus = 'no'";
 
-
-// $query = "SELECT * FROM 'bases'";
 
 $dir = 'sqlite:../db/bases-db.db';
 $dbh  = new PDO($dir) or die("Cannot open the database");
@@ -76,14 +76,14 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 <body>
 	<nav class="navbar navbar-expand-sm navbar-light bg-light">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">USA Military Base Search</a>
+			<div class="navbar-brand" href="#">USA Military Base Search</div>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navab"
 				aria-controls="navab" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navab">
-				<div class="navbar-nav">
-					<a class="nav-link active" aria-current="page" href="#">Home</a>
+				<div class="navbar-nav mr-6">
+					<a class="nav-link active" aria-current="page" href="/">Home</a>
 					<div class="dropdown">
 						<a class="btn btn-light dropdown-toggle" href="#" role="button" id="branchDropdown"
 							data-bs-toggle="dropdown" aria-expanded="false">
@@ -111,9 +111,12 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 					</div>
 				</div>
 			</div>
+			<span class="navbar-text">
+				Last Updated: 20220205
+			</span>
+		</div>
 		</div>
 	</nav>
-
 	<form action="<?php echo $_SERVER['PHP_SELF']?>" method="GET" class="form-horizontal">
 		<div class="container">
 			<div class="row">
@@ -188,7 +191,7 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 					</section>
 	</form>
 	<hr>
-	<section>
+	<section id="result">
 		<div class="text-secondary">
 			<small>You chose:</small>
 		</div>
@@ -223,36 +226,41 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 	</section>
 	<hr>
 	<div class="col-1"></div>
-
 	<footer>
 		<div class="container">
 			<div class="row">
 				<div class="col-4"></div>
 				<div class="col-4">
-					&copy 2022
-					<a href="https://github.com/lucasburlingham" style="color: black;"><i
-							class="fab fa-github-square"></i></a> Lucas Burlingham
+					&copy 2022 Lucas Burlingham
+					<br>
+					Source:
+
+					<a href="https://github.com/lucasburlingham" style="color: black; text-decoration: none;">
+						<i class="fab fa-github-square"></i> Github
+					</a>
 				</div>
 				<div class="col-4"></div>
 			</div>
 		</div>
 	</footer>
-	<!-- Bootstrap JavaScript Libraries -->
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-		integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
-	</script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-		integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
-	</script>
-	<!-- FontAwesome 5.15.3 CSS -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-		integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<div id="scripts">
+		<!-- Bootstrap JavaScript Libraries -->
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+			integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+		</script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+			integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+		</script>
+		<!-- FontAwesome 5.15.3 CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+			integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+			crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-	<!-- (Optional) Use CSS or JS implementation -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
-		integrity="sha512-RXf+QSDCUQs5uwRKaDoXt55jygZZm2V++WUZduaU/Ui/9EGp3f/2KZVahFZBKGH0s774sd3HmrhUy+SgOFQLVQ=="
-		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<!-- (Optional) Use CSS or JS implementation -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
+			integrity="sha512-RXf+QSDCUQs5uwRKaDoXt55jygZZm2V++WUZduaU/Ui/9EGp3f/2KZVahFZBKGH0s774sd3HmrhUy+SgOFQLVQ=="
+			crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	</div>
 </body>
 
 </html>
