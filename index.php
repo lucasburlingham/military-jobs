@@ -75,7 +75,6 @@ $dir = 'sqlite:db/mos-db.db';
 $dbh  = new PDO($dir) or die("Cannot open the database");
 
 ?>
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -88,6 +87,9 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link rel="stylesheet" href="/style.css">
 	<script src="/showSeries.js"></script>
+	<?php
+	include "favicon.php";
+	?>
 </head>
 
 <body>
@@ -112,7 +114,8 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 								<a class="dropdown-item" target="_blank" href="https://goarmy.com">Army</a>
 							</li>
 							<li>
-								<a class="dropdown-item" target="_blank" href="https://www.airforce.com/">Air Force</a>
+								<a class="dropdown-item" target="_blank" href="https://www.airforce.com/">Air
+									Force</a>
 							</li>
 							<li>
 								<a class="dropdown-item" target="_blank" href="https://www.marines.com/">Marine
