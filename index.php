@@ -2,11 +2,13 @@
 
 include_once 'functions.php';
 
-foreach ($_GET as $data) {
-	consoleLog($data);
-}
 
 // Log all of the entries to the form
+// DEBUG ONLY
+// foreach ($_GET as $data) {
+// 	consoleLog($data);
+// }
+
 
 // if branch is set, get it from the form
 if(isset($_GET['branch'])) {
@@ -69,7 +71,7 @@ if(isset($series_query)) {
 }
 
 
-$dir = 'sqlite:mos-db.db';
+$dir = 'sqlite:db/mos-db.db';
 $dbh  = new PDO($dir) or die("Cannot open the database");
 
 ?>
@@ -104,7 +106,6 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 							data-bs-toggle="dropdown" aria-expanded="false">
 							Branch Websites
 						</a>
-
 						<ul class="dropdown-menu" aria-labelledby="branchDropdown">
 							<li>
 								<a class="dropdown-item" target="_blank" href="https://goarmy.com">Army</a>
@@ -224,7 +225,8 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 						
 						foreach ($dbh->query($query) as $row)
 							{
-								consoleLog($row);
+								// DEBUG ONLY
+								// consoleLog($row);
 								echo "<tr><th scope=\"row\">" . $row[0] . "</th><td>" . $row[1] . "</td><td>" . $row[2] . "</td></tr>";
 							}
 						$dbh = null;
