@@ -62,7 +62,7 @@ include_once '../functions.php';
 				</div>
 			</div>
 			<span class="navbar-text">
-				Last Updated: 20220205
+				Last Updated: 20220210
 			</span>
 		</div>
 	</nav>
