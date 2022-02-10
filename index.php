@@ -103,7 +103,8 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 			<div class="collapse navbar-collapse" id="navab">
 				<div class="navbar-nav">
 					<a class="nav-link active" aria-current="page" href="#">Home</a>
-					<a class="nav-link active" aria-current="page" href="/bases/">Bases</a>
+					<a class="nav-link" aria-current="page" href="/bases/">Bases</a>
+					<a class="nav-link" aria-current="page" href="/pay/">Pay Scales</a>
 					<div class="dropdown">
 						<a class="btn btn-light dropdown-toggle" href="#" role="button" id="branchDropdown"
 							data-bs-toggle="dropdown" aria-expanded="false">
