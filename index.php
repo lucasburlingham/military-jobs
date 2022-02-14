@@ -171,8 +171,8 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 							</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" value="marines" id="coastguard" name="branch">
-							<label class="form-check-label" for="marines">
+							<input class="form-check-input" type="radio" value="coastguard" id="coastguard" name="branch">
+							<label class="form-check-label" for="coastguard">
 								<i class="fa fa-life-ring" aria-hidden="true"></i> Coast Guard
 							</label>
 						</div>
