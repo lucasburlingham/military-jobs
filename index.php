@@ -153,11 +153,12 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 								<i class="fa fa-fighter-jet" aria-hidden="true"></i> Air Force
 							</label>
 						</div>
-
-						<input class="form-check-input" type="radio" value="army" id="army" name="branch">
-						<label class="form-check-label" for="army">
-							<i class="fa fa-star" aria-hidden="true"></i> Army
-						</label>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" value="army" id="army" name="branch">
+							<label class="form-check-label" for="army">
+								<i class="fa fa-star" aria-hidden="true"></i> Army
+							</label>
+						</div>
 						<div class="form-check">
 							<input class="form-check-input" type="radio" value="navy" id="navy" name="branch">
 							<label class="form-check-label" for="navy">
@@ -171,7 +172,8 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 							</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" value="coastguard" id="coastguard" name="branch">
+							<input class="form-check-input" type="radio" value="coastguard" id="coastguard"
+								name="branch">
 							<label class="form-check-label" for="coastguard">
 								<i class="fa fa-life-ring" aria-hidden="true"></i> Coast Guard
 							</label>
@@ -203,13 +205,21 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 						<br>
 						<button type="submit" class="btn btn-primary">Submit</button>
 					</section>
+				</div>
+				<div class="col-1"></div>
+			</div>
+		</div>
 	</form>
 	<hr>
 	<section>
-		<div class="text-secondary">
-			<small>You chose:</small>
-		</div>
-		<?php
+		<div class="container">
+			<div class="row">
+				<div class="col-1"></div>
+				<div class="col-10">
+					<div class="text-secondary">
+						<small>You chose:</small>
+					</div>
+					<?php
 						$branch_pretty = ucwords($branch);
 						$rank_pretty = ucwords($rank);
 
@@ -221,15 +231,15 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 						}
 						echo "<b>Result: </b>";
 						?>
-		<table class="table table-secondary table-striped table-hover">
-			<thead>
-				<tr>
-					<th scope="col">Code</th>
-					<th scope="col">Job Title</th>
-					<th scope="col">Rank held</th>
-				</tr>
-			</thead>
-			<?php
+					<table class="table table-secondary table-striped table-hover">
+						<thead>
+							<tr>
+								<th scope="col">Code</th>
+								<th scope="col">Job Title</th>
+								<th scope="col">Rank held</th>
+							</tr>
+						</thead>
+						<?php
 						
 						foreach ($dbh->query($query) as $row)
 							{
@@ -240,13 +250,15 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 						$dbh = null;
 						
 						?>
-		</table>
+					</table>
+				</div>
+				<div class="col-1"></div>
+			</div>
+		</div>
 	</section>
 	<hr>
-	<div class="col-1"></div>
-
 	<?php
-		include '/footer.php';
+		include 'footer.php';
 	?>
 </body>
 
