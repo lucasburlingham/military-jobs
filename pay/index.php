@@ -30,7 +30,7 @@ include_once '../functions.php';
 			</button>
 			<div class="collapse navbar-collapse" id="navab">
 				<div class="navbar-nav">
-					<a class="nav-link active" aria-current="page" href="#">Home</a>
+					<a class="nav-link active" aria-current="page" href="/">Home</a>
 					<a class="nav-link" aria-current="page" href="/bases/">Bases</a>
 					<a class="nav-link" aria-current="page" href="/pay/">Pay Scales</a>
 					<div class="dropdown">
@@ -62,7 +62,7 @@ include_once '../functions.php';
 				</div>
 			</div>
 			<span class="navbar-text">
-				Last Updated: 20220210
+				Last Updated: 20220601
 			</span>
 		</div>
 	</nav>
