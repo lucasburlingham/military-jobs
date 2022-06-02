@@ -134,7 +134,7 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 				</div>
 			</div>
 			<span class="navbar-text">
-				Last Updated: 20220205
+				Last Updated: 20220602
 			</span>
 		</div>
 	</nav>
