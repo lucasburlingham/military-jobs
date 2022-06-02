@@ -9,8 +9,8 @@
 				<br>
 				Source:
 
-				<a href="https://github.com/lucasburlingham/military-jobs" style="color: black; text-decoration: none;"
-					target="_blank">
+				<a href="https://github.com/lucasburlingham/militaryjobtool.info"
+					style="color: black; text-decoration: none;" target="_blank">
 					<i class="fab fa-github-square"></i> Github
 				</a>
 			</div>
