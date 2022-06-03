@@ -72,14 +72,14 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link rel="stylesheet" href="../style.css">
 	<?php
-	include "../favicon.php";
+	include '/elements/favicon.php';
 	?>
 </head>
 
 <body>
 	<nav class="navbar navbar-expand-sm navbar-light bg-light">
 		<div class="container-fluid">
-			<div class="navbar-brand" href="#">USA Military Base Search</div>
+			<div class="navbar-brand" href="#">Military Job Search</div>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navab"
 				aria-controls="navab" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -87,37 +87,15 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 			<div class="collapse navbar-collapse" id="navab">
 				<div class="navbar-nav mr-6">
 					<a class="nav-link" aria-current="page" href="/">Home</a>
-					<a class="nav-link" aria-current="page" href="/pay/">Pay Scales</a>
 					<a class="nav-link active" aria-current="page" href="/bases/">Bases</a>
-					<div class="dropdown">
-						<a class="btn btn-light dropdown-toggle" href="#" role="button" id="branchDropdown"
-							data-bs-toggle="dropdown" aria-expanded="false">
-							Branch Websites
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="branchDropdown">
-							<li>
-								<a class="dropdown-item" target="_blank" href="https://goarmy.com">Army</a>
-							</li>
-							<li>
-								<a class="dropdown-item" target="_blank" href="https://www.airforce.com/">Air Force</a>
-							</li>
-							<li>
-								<a class="dropdown-item" target="_blank" href="https://www.marines.com/">Marine
-									Corps</a>
-							</li>
-							<li>
-								<a class="dropdown-item" target="_blank" href="https://www.navy.com/">Navy</a>
-							</li>
-							<li>
-								<a class="dropdown-item" target="_blank" href="https://www.gocoastguard.com/">Coast
-									Guard</a>
-							</li>
-						</ul>
-					</div>
+					<a class="nav-link" aria-current="page" href="/pay/">Pay Scales</a>
+					<?php
+						include $_SERVER['DOCUMENT_ROOT'] . "/elements/branch_dropdown.php";
+					?>
 				</div>
 			</div>
 			<span class="navbar-text">
-				Last Updated: 20220205
+				Last Updated: 20220602
 			</span>
 		</div>
 		</div>
@@ -232,7 +210,7 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 	<hr>
 	<div class="col-1"></div>
 	<?php
-		include '../footer.php';
+		include $_SERVER['DOCUMENT_ROOT'] . "/elements/footer.php";
 	?>
 </body>
 

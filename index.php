@@ -1,6 +1,6 @@
 <?php
 
-include_once 'functions.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . "/functions.php";
 
 
 // Log all of the entries to the form
@@ -28,19 +28,19 @@ if (isset($_GET['rank'])) {
 
 // Format table names for use in query
 switch(isset($branch)) {
-	case ($branch == "airforce"):
+	case ($branch == 'airforce'):
 		$branch_query = 'airforce';
 		break;
-	case ($branch == "army"):
+	case ($branch == 'army'):
 		$branch_query = 'army';
 		break;
-	case ($branch == "navy"):
+	case ($branch == 'navy'):
 		$branch_query = 'navy';
 		break;
-	case ($branch == "marines"):
+	case ($branch == 'marines'):
 		$branch_query = 'marines';
 		break;
-	case ($branch == "coastguard"):
+	case ($branch == 'coastguard'):
 		$branch_query = 'coastguard';
 		break;
 	default:
@@ -88,7 +88,7 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 	<link rel="stylesheet" href="/style.css">
 	<script src="/showSeries.js"></script>
 	<?php
-	include "favicon.php";
+		include_once $_SERVER['DOCUMENT_ROOT'] . "/elements/favicon.php";
 	?>
 </head>
 
@@ -105,32 +105,9 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 					<a class="nav-link active" aria-current="page" href="/">Home</a>
 					<a class="nav-link" aria-current="page" href="/bases/">Bases</a>
 					<a class="nav-link" aria-current="page" href="/pay/">Pay Scales</a>
-					<div class="dropdown">
-						<a class="btn btn-light dropdown-toggle" href="#" role="button" id="branchDropdown"
-							data-bs-toggle="dropdown" aria-expanded="false">
-							Branch Websites
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="branchDropdown">
-							<li>
-								<a class="dropdown-item" target="_blank" href="https://goarmy.com">Army</a>
-							</li>
-							<li>
-								<a class="dropdown-item" target="_blank" href="https://www.airforce.com/">Air
-									Force</a>
-							</li>
-							<li>
-								<a class="dropdown-item" target="_blank" href="https://www.marines.com/">Marine
-									Corps</a>
-							</li>
-							<li>
-								<a class="dropdown-item" target="_blank" href="https://www.navy.com/">Navy</a>
-							</li>
-							<li>
-								<a class="dropdown-item" target="_blank" href="https://www.gocoastguard.com/">Coast
-									Guard</a>
-							</li>
-						</ul>
-					</div>
+					<?php
+						include $_SERVER['DOCUMENT_ROOT'] . "/elements/branch_dropdown.php";
+					?>
 				</div>
 			</div>
 			<span class="navbar-text">
@@ -224,7 +201,9 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 						$rank_pretty = ucwords($rank);
 
 						echo "<b>Branch: </b><i>" . $branch_pretty . "</i><br>";
-						echo "<b>Rank: </b><i>" . $rank_pretty . "</i><br>";
+						if (isset($rank_pretty) && $rank_pretty != "") {
+							echo "<b>Rank: </b><i>" . $rank_pretty . "</i><br>";
+						}
 						echo "<b>Query: </b><code>" . $query . "</code><br>";
 						if($branch_pretty == "Army"){
 							echo "<b>Series: </b><i>" . $series . "</i><br>";
@@ -258,7 +237,7 @@ $dbh  = new PDO($dir) or die("Cannot open the database");
 	</section>
 	<hr>
 	<?php
-		include 'footer.php';
+		include $_SERVER['DOCUMENT_ROOT'] . "/elements/footer.php";
 	?>
 </body>
 
